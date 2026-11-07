@@ -4,6 +4,7 @@ const SG_PRODUCTS = {
   single:    { name: 'The Single',     price: 3900 },
   pair:      { name: 'The Pair',       price: 6900 },
   household: { name: 'The Household',  price: 9500 },
+  refill:    { name: 'Refill mat',     price: 2700 },
   clips:     { name: 'Spare clip set', price: 900 },
 };
 const SG_SHIPPING = 1200, SG_FREE_OVER = 7500;

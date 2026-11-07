@@ -40,6 +40,7 @@ return array_merge([
     'single'    => ['name' => 'StreamGrid — The Single',    'desc' => '1 StreamGrid, 1 clip, mounting tape',  'price' => 3900],
     'pair'      => ['name' => 'StreamGrid — The Pair',      'desc' => '2 StreamGrid, 2 clips, mounting tape', 'price' => 6900],
     'household' => ['name' => 'StreamGrid — The Household', 'desc' => '3 StreamGrid, 3 clips, mounting tape', 'price' => 9500],
+    'refill'    => ['name' => 'StreamGrid refill mat',      'desc' => '1 replacement mat (uses your existing clip)', 'price' => 2700],
     'clips'     => ['name' => 'Spare clip set',             'desc' => '2 clips and mounting tape',            'price' => 900],
   ],
 
