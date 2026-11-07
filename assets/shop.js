@@ -10,7 +10,15 @@ const SG_PRODUCTS = {
   'pair-sub':      { name: 'Pair subscription',      price: 5900, every: 3 },
   'household-sub': { name: 'Household subscription', price: 8100, every: 3 },
 };
-const SG_SHIPPING = 1200, SG_FREE_OVER = 7500;
+// Keep in step with 'shipping_zones' in config.php
+const SG_ZONES = {
+  CA:    { label: 'Canada',            flat: 1200, freeOver: 7500, sub: 0 },
+  US:    { label: 'United States',     flat: 1800, freeOver: 0,    sub: 1800 },
+  WORLD: { label: 'Rest of the world', flat: 2800, freeOver: 0,    sub: 2800 },
+};
+let zone = 'CA';
+try { zone = localStorage.getItem('sg_zone') || 'CA'; } catch (e) {}
+if (!SG_ZONES[zone]) zone = 'CA';
 
 const money = c => '$' + (c / 100).toFixed(2);
 let cart = [];
@@ -34,7 +42,8 @@ function render() {
   const list = document.getElementById('cart-lines');
   const sub = cart.reduce((s, i) => s + SG_PRODUCTS[i.id].price * i.qty, 0);
   const recurring = cart.reduce((s, i) => s + (SG_PRODUCTS[i.id].every ? SG_PRODUCTS[i.id].price * i.qty : 0), 0);
-  const ship = sub === 0 || recurring > 0 || sub >= SG_FREE_OVER ? 0 : SG_SHIPPING;
+  const z = SG_ZONES[zone];
+  const ship = sub === 0 ? 0 : recurring > 0 ? z.sub : (z.freeOver && sub >= z.freeOver ? 0 : z.flat);
   list.innerHTML = cart.length ? '' : '<p class="cart-empty">Your cart is empty.</p>';
   cart.forEach(i => {
     const p = SG_PRODUCTS[i.id];
@@ -51,8 +60,9 @@ function render() {
   document.getElementById('cart-ship').textContent = sub === 0 ? '—' : (ship ? money(ship) : 'Free');
   document.getElementById('cart-total').textContent = money(sub + ship);
   const note = document.getElementById('cart-note');
-  if (recurring) note.textContent = `Then ${money(recurring)} every 3 months. Ships free. Cancel anytime.`;
-  else note.textContent = sub > 0 && sub < SG_FREE_OVER ? `Add ${money(SG_FREE_OVER - sub)} more for free shipping.` : (sub ? 'Your order ships free.' : '');
+  if (recurring) note.textContent = `Then ${money(recurring + z.sub)} every 3 months${z.sub ? ' including shipping' : '. Ships free'}. Cancel anytime.`;
+  else if (sub && z.freeOver && sub < z.freeOver) note.textContent = `Add ${money(z.freeOver - sub)} more for free shipping.`;
+  else note.textContent = sub && !ship ? 'Your order ships free.' : (zone !== 'CA' && sub ? 'Import duties or taxes may apply on delivery.' : '');
   document.getElementById('cart-total-label').textContent = recurring ? 'Due today' : 'Total';
   document.getElementById('checkout-btn').disabled = cart.length === 0;
 }
@@ -65,7 +75,7 @@ async function checkout() {
   const btn = document.getElementById('checkout-btn'), err = document.getElementById('cart-error');
   err.textContent = ''; btn.disabled = true; btn.textContent = 'One moment…';
   try {
-    const r = await fetch('checkout.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: cart }) });
+    const r = await fetch('checkout.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: cart, zone }) });
     const data = await r.json();
     if (data.url) { window.location = data.url; return; }
     err.textContent = data.error || 'Checkout could not start.';
@@ -99,5 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-close-cart]').forEach(b => b.addEventListener('click', closeCart));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
   document.getElementById('checkout-btn').addEventListener('click', checkout);
+  const zs = document.getElementById('cart-zone');
+  zs.value = zone;
+  zs.addEventListener('change', () => { zone = zs.value; try { localStorage.setItem('sg_zone', zone); } catch (e) {} render(); });
   render();
 });

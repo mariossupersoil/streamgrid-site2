@@ -55,10 +55,19 @@ return array_merge([
   // streamgrid-secrets.php as 'portal_url'.
   'portal_url' => '',
 
-  // 4. Shipping (in cents). Free when the order reaches the threshold.
-  'shipping_flat'           => 1200,   // $12.00
-  'free_shipping_threshold' => 7500,   // $75.00
-  'ship_to_countries'       => ['CA'], // add 'US' to ship to the United States
+  // 4. Shipping zones (prices in cents). The customer picks a zone in the cart,
+  //    and Stripe only accepts addresses inside that zone.
+  //    flat:         one-time orders
+  //    free_over:    one-time orders ship free above this (0 = never free)
+  //    sub_shipping: added to each subscription box (0 = free)
+  //    CHECK REAL POSTAGE: the US and world rates are starting estimates.
+  'shipping_zones' => [
+    'CA'    => ['label' => 'Canada',            'countries' => ['CA'], 'flat' => 1200, 'free_over' => 7500, 'sub_shipping' => 0],
+    'US'    => ['label' => 'United States',     'countries' => ['US'], 'flat' => 1800, 'free_over' => 0,    'sub_shipping' => 1800],
+    'WORLD' => ['label' => 'Rest of the world', 'countries' => '*',    'flat' => 2800, 'free_over' => 0,    'sub_shipping' => 2800],
+  ],
+  // Countries to leave out of "Rest of the world", e.g. ['RU', 'BY'].
+  'world_exclude' => [],
 
   // 5. Sales tax. Leave false until you have set up Stripe Tax
   //    (Stripe Dashboard > Tax). Then change to true.

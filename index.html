@@ -185,6 +185,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .totals { border-top: 1px solid rgba(31,36,39,.15); padding-top: 18px; margin-top: 12px; }
 .totals div { display: flex; justify-content: space-between; padding: 4px 0; color: var(--slate); }
 .totals .grand { color: var(--graphite); font-size: 20px; padding-top: 10px; }
+#cart .zone { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--slate); }
+#cart .zone select { font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--graphite); background: transparent; border: 1px solid rgba(31,36,39,.2); padding: 8px 10px; }
 #cart-note { font-size: 13px; color: var(--brass); margin-top: 8px; min-height: 1.3em; }
 #checkout-btn { width: 100%; margin-top: 18px; }
 #checkout-btn:disabled { opacity: .45; cursor: not-allowed; }
@@ -307,7 +309,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <h2 class="reveal">Choose your set.</h2>
       <p class="lead reveal" style="margin-top:16px">Every set comes ready to hang: the mat with its adjustable strap, a clip, and waterproof mounting tape.</p>
       <div class="sets">
-        <div class="set reveal" data-plan-card data-one-price="$39" data-sub-price="$33" data-one-save="" data-sub-save="Save $6 · fresh mat every 3 months · ships free">
+        <div class="set reveal" data-plan-card data-one-price="$39" data-sub-price="$33" data-one-save="" data-sub-save="Save $6 · fresh mat every 3 months">
           <h3>The Single</h3><p class="what">For one bathroom.</p>
           <div class="plan" role="radiogroup" aria-label="Purchase option for The Single">
             <label><input type="radio" name="plan-single" value="single" checked><span>One-time</span></label>
@@ -317,7 +319,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
           <ul><li>1 StreamGrid</li><li>1 clip and mounting tape</li></ul>
           <button class="btn" data-add="single">Add to cart</button>
         </div>
-        <div class="set reveal" data-plan-card data-one-price="$69" data-sub-price="$59" data-one-save="Save $9" data-sub-save="Save $10 · fresh mats every 3 months · ships free">
+        <div class="set reveal" data-plan-card data-one-price="$69" data-sub-price="$59" data-one-save="Save $9" data-sub-save="Save $10 · fresh mats every 3 months">
           <h3>The Pair</h3><p class="what">The main bath and the guest bath.</p>
           <div class="plan" role="radiogroup" aria-label="Purchase option for The Pair">
             <label><input type="radio" name="plan-pair" value="pair" checked><span>One-time</span></label>
@@ -327,7 +329,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
           <ul><li>2 StreamGrid</li><li>2 clips and mounting tape</li></ul>
           <button class="btn" data-add="pair">Add to cart</button>
         </div>
-        <div class="set featured reveal" data-plan-card data-one-price="$95" data-sub-price="$81" data-one-save="Save $22 · ships free" data-sub-save="Save $14 more · fresh mats every 3 months · ships free">
+        <div class="set featured reveal" data-plan-card data-one-price="$95" data-sub-price="$81" data-one-save="Save $22 · ships free in Canada" data-sub-save="Save $14 more · fresh mats every 3 months">
           <span class="tag">Best value</span>
           <h3>The Household</h3><p class="what">Every bathroom, done.</p>
           <div class="plan" role="radiogroup" aria-label="Purchase option for The Household">
@@ -347,7 +349,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <div><h3 style="font-size:24px">Spare clip set · $9</h3><p>Two extra clips and tape, for a second toilet or a fresh start.</p></div>
         <button class="btn ghost" data-add="clips">Add to cart</button>
       </div>
-      <p class="ship-note reveal">Prices in Canadian dollars. Subscriptions ship free and renew every 3 months; cancel anytime. One-time orders ship free over $75, otherwise $12. Secure checkout by Stripe.</p>
+      <p class="ship-note reveal">We ship worldwide. Prices in Canadian dollars. Canada: free over $75, otherwise $12, and subscriptions always ship free. United States: $18. Rest of the world: $28. Import duties may apply outside Canada. Secure checkout by Stripe.</p>
     </div>
   </section>
 
@@ -373,8 +375,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <details class="reveal"><summary>How do I clean it?</summary><p>Lift it out once a week and rinse it in warm, soapy water, then hang it back up. It is one piece, so there is nothing to take apart.</p></details>
         <details class="reveal"><summary>Does the clip mark the porcelain?</summary><p>The clip attaches with waterproof foam tape, not screws or glue. It sits just under the rim, out of sight.</p></details>
         <details class="reveal"><summary>How often should I replace it?</summary><p>Every 3 months, for the freshest bathroom. Your clip stays in place, so you only need a refill mat.</p></details>
-        <details class="reveal"><summary>How does the subscription work?</summary><p>You pay today and receive your set with its clip. Every 3 months after that, we send fresh mats and charge the subscription price. It always ships free, and you can cancel anytime from the "Manage subscription" link at the bottom of this page.</p></details>
-        <details class="reveal"><summary>How does shipping work?</summary><p>Subscriptions always ship free. One-time orders ship free in Canada over $75, and $12 otherwise. We email you when your order ships.</p></details>
+        <details class="reveal"><summary>How does the subscription work?</summary><p>You pay today and receive your set with its clip. Every 3 months after that, we send fresh mats and charge the subscription price. In Canada it always ships free, and you can cancel anytime from the "Manage subscription" link at the bottom of this page.</p></details>
+        <details class="reveal"><summary>How does shipping work?</summary><p>We ship worldwide. In Canada, orders over $75 and all subscriptions ship free; otherwise it is $12. Shipping is $18 to the United States and $28 to the rest of the world. Choose your country in the cart. Import duties may apply outside Canada. We email you when your order ships.</p></details>
       </div>
     </div>
   </section>
@@ -412,6 +414,13 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   <aside class="panel" role="dialog" aria-label="Your cart">
     <div class="panel-head"><h3>Your cart</h3><button class="close" data-close-cart aria-label="Close cart">×</button></div>
     <div id="cart-lines"></div>
+    <label class="zone">Ship to
+      <select id="cart-zone">
+        <option value="CA">Canada</option>
+        <option value="US">United States</option>
+        <option value="WORLD">Rest of the world</option>
+      </select>
+    </label>
     <div class="totals">
       <div><span>Subtotal</span><span id="cart-sub">$0.00</span></div>
       <div><span>Shipping</span><span id="cart-ship">—</span></div>

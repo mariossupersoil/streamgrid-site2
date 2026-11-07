@@ -14,6 +14,14 @@ if (!preg_match('/^sk_(test|live)_[A-Za-z0-9]{10,}$/', $cfg['stripe_secret_key']
 
 $in   = json_decode(file_get_contents('php://input'), true);
 $cart = is_array($in['items'] ?? null) ? $in['items'] : [];
+$zone_id = (string)($in['zone'] ?? 'CA');
+if (!isset($cfg['shipping_zones'][$zone_id])) $zone_id = 'CA';
+$zone = $cfg['shipping_zones'][$zone_id];
+if ($zone['countries'] === '*') {
+  $others = [];
+  foreach ($cfg['shipping_zones'] as $z) if (is_array($z['countries'])) $others = array_merge($others, $z['countries']);
+  $zone['countries'] = array_values(array_diff(require __DIR__ . '/stripe-countries.php', $others, $cfg['world_exclude']));
+}
 
 // Rebuild the order from OUR prices only.
 $params = [
@@ -44,22 +52,31 @@ foreach ($cart as $item) {
 }
 if ($i === 0) fail('Your cart is empty.');
 
-foreach ($cfg['ship_to_countries'] as $k => $c) $params["shipping_address_collection[allowed_countries][$k]"] = $c;
+foreach ($zone['countries'] as $k => $c) $params["shipping_address_collection[allowed_countries][$k]"] = $c;
 
 if ($has_sub) {
   // Subscription checkout: billed today and every 3 months. Anything else in
-  // the same order is charged once. Subscription orders always ship free.
+  // the same order is charged once. Shipping, if any, is added to each box.
   $params['mode'] = 'subscription';
+  if ($zone['sub_shipping'] > 0) {
+    $params["line_items[$i][quantity]"] = 1;
+    $params["line_items[$i][price_data][currency]"] = $cfg['currency'];
+    $params["line_items[$i][price_data][unit_amount]"] = $zone['sub_shipping'];
+    $params["line_items[$i][price_data][product_data][name]"] = 'Shipping to ' . $zone['label'];
+    $params["line_items[$i][price_data][recurring][interval]"] = 'month';
+    $params["line_items[$i][price_data][recurring][interval_count]"] = 3;
+    $i++;
+  }
 } else {
-$free = $subtotal >= $cfg['free_shipping_threshold'];
+$free = $zone['free_over'] > 0 && $subtotal >= $zone['free_over'];
 $params['shipping_options[0][shipping_rate_data][type]'] = 'fixed_amount';
-$params['shipping_options[0][shipping_rate_data][display_name]'] = $free ? 'Free shipping' : 'Standard shipping';
-$params['shipping_options[0][shipping_rate_data][fixed_amount][amount]'] = $free ? 0 : $cfg['shipping_flat'];
+$params['shipping_options[0][shipping_rate_data][display_name]'] = ($free ? 'Free shipping' : 'Standard shipping') . ' — ' . $zone['label'];
+$params['shipping_options[0][shipping_rate_data][fixed_amount][amount]'] = $free ? 0 : $zone['flat'];
 $params['shipping_options[0][shipping_rate_data][fixed_amount][currency]'] = $cfg['currency'];
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][minimum][unit]'] = 'business_day';
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'] = 3;
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][maximum][unit]'] = 'business_day';
-$params['shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]'] = 8;
+$params['shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]'] = $zone_id === 'CA' ? 8 : ($zone_id === 'US' ? 12 : 25);
 }
 if ($cfg['automatic_tax']) $params['automatic_tax[enabled]'] = 'true';
 
