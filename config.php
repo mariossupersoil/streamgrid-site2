@@ -43,6 +43,12 @@ return array_merge([
     'refill'    => ['name' => 'StreamGrid refill mat',      'desc' => '1 replacement mat (uses your existing clip)', 'price' => 2700],
     'clips'     => ['name' => 'Spare clip set',             'desc' => '2 clips and mounting tape',            'price' => 900],
 
+    // StepGrip (shower) and StreamPet (pets)
+    'stepgrip'     => ['name' => 'StepGrip foot scrubbing mat', 'desc' => 'Silicone shower mat with 28 suction cups', 'price' => 3400],
+    'scrubber'     => ['name' => 'StepGrip Scrubber',           'desc' => 'Handheld silicone scrubber with grip handle', 'price' => 1700],
+    'stepgrip-set' => ['name' => 'StepGrip Set',                'desc' => 'Foot scrubbing mat and hand scrubber', 'price' => 4500],
+    'streampet'    => ['name' => 'StreamPet lick mat',          'desc' => 'Food-grade silicone lick mat with suction cups', 'price' => 3200],
+
     // Subscribe & save: billed today, then every 3 months. Always ships free.
     // First box includes clips and tape; later boxes are fresh mats only.
     'single-sub'    => ['name' => 'StreamGrid subscription — Single',    'desc' => '1 fresh mat every 3 months (first box includes clip and tape)',  'price' => 3300, 'every_months' => 3],

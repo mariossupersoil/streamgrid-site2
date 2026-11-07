@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StreamPet — Bath time, made calm</title>
+<meta name="description" content="StreamPet is a food-grade silicone lick mat for dogs and cats that sticks to the tub wall with suction cups.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  :root { --brass: #9A5332; --brass-lt: #D9A88C; --deep: #5A3524; }
+  .set .price small { font-family: var(--sans); font-size: 14px; color: var(--slate); }
+  .gallery.two figure:nth-child(n) { grid-column: span 3; grid-row: auto; }
+  .back-link { font-size: 13px; color: var(--slate); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="streampet.html" aria-label="StreamPet home">
+      <svg viewBox="0 0 72 72" aria-hidden="true"><g fill="none" stroke="#9A5332" stroke-width="4" stroke-linecap="round"><rect x="2" y="2" width="68" height="68" rx="22"/><path d="M20 30q8-8 16 0t16 0"/><path d="M20 44q8-8 16 0t16 0"/></g></svg>
+      <span>StreamPet</span>
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#details">Details</a>
+      <button class="cart-btn" data-open-cart aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7Z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg><span class="label">Cart</span><span class="count" data-cart-count hidden>0</span></button>
+      <a class="btn" href="#shop">Shop</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="eyebrow fade d1">Lick mat for dogs and cats</p>
+        <h1 class="fade d2">Bath time, made calm.</h1>
+        <p class="lead fade d3">Spread a treat across StreamPet, stick it to the tub wall, and let your pet lick while you wash. Three textures keep them busy longer.</p>
+        <div class="actions fade d4">
+          <a class="btn" href="#shop">Shop StreamPet</a>
+          <a class="btn ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-img"><img src="assets/img/streampet-hero.jpg" alt="StreamPet silicone lick mat" width="1310" height="819" fetchpriority="high"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap intro">
+      <div class="reveal"><h3>Sticks to tile</h3><p>16 suction cups hold it to the tub wall, a tiled floor or any smooth surface.</p></div>
+      <div class="reveal"><h3>Three lick textures</h3><p>Nubs, wavy ridges and little cells, from easy to slow.</p></div>
+      <div class="reveal"><h3>Built for chewers</h3><p>Thick, rounded shapes and big round corners. No thin spikes.</p></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <p class="eyebrow reveal">The details</p>
+      <h2 class="reveal">Made with care.</h2>
+      <div class="gallery two">
+        <figure class="reveal"><img src="assets/img/streampet-detail.jpg" alt="Close-up of StreamPet lick textures" loading="lazy" width="1200" height="1200"><figcaption>Wavy ridges and grid cells hold more treat.</figcaption></figure>
+        <figure class="reveal"><img src="assets/img/streampet-back.jpg" alt="Suction cups on the back of StreamPet" loading="lazy" width="1200" height="1200"><figcaption>16 suction cups on the back.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP — to change a price, change it in config.php AND assets/shop.js -->
+  <section id="shop">
+    <div class="wrap">
+      <p class="eyebrow reveal">Shop</p>
+      <h2 class="reveal">One mat, many baths.</h2>
+      <p class="lead reveal" style="margin-top:16px">Made from food-grade platinum silicone. Always supervise your pet while they use it.</p>
+      <div class="sets one">
+        <div class="set featured reveal">
+          <span class="tag">New</span>
+          <h3>StreamPet</h3><p class="what">For dogs and cats.</p>
+          <div class="price">$32</div><div class="save">&nbsp;</div>
+          <ul><li>Lick mat with 3 textures</li><li>16 suction cups</li></ul>
+          <button class="btn" data-add="streampet">Add to cart</button>
+        </div>
+      </div>
+      <p class="ship-note reveal">We ship worldwide. Prices in Canadian dollars. Canada: free over $75, otherwise $12. United States: $18. Rest of the world: $28. Import duties may apply outside Canada. Secure checkout by Stripe.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="details">
+    <div class="wrap details">
+      <div class="reveal">
+        <p class="eyebrow">Details</p>
+        <h2>Simple, by intention.</h2>
+        <div class="rule"></div>
+        <p class="lead">One piece of silicone. No glue, no batteries, nothing to assemble.</p>
+      </div>
+      <ul class="specs reveal">
+        <li><span>Material</span><span>Food-grade platinum silicone</span></li>
+        <li><span>Size</span><span>200 × 200 mm</span></li>
+        <li><span>Textures</span><span>Nubs, ridges and grid cells</span></li>
+        <li><span>Grip</span><span>16 suction cups</span></li>
+        <li><span>Care</span><span>Wash in warm, soapy water</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow reveal">Questions</p>
+      <h2 class="reveal">Good to know.</h2>
+      <div class="faq">
+        <details class="reveal"><summary>What can I spread on it?</summary><p>Plain yogurt, wet food or peanut butter. Choose peanut butter without xylitol, which is toxic to dogs.</p></details>
+        <details class="reveal"><summary>Is it safe for my pet?</summary><p>It is made from food-grade silicone, with thick, rounded shapes and no thin spikes. Always supervise your pet, and take it away if they start chewing it.</p></details>
+        <details class="reveal"><summary>How do I clean it?</summary><p>Rinse it right after use, then wash it in warm, soapy water. A small brush gets into the cells.</p></details>
+        <details class="reveal"><summary>How does shipping work?</summary><p>We ship worldwide. In Canada, orders over $75 ship free; otherwise it is $12. Shipping is $18 to the United States and $28 to the rest of the world. Choose your country in the cart.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 StreamPet</span>
+    <span class="back-link">Also from our workshop: <a href="index.html">StreamGrid</a> · <a href="stepgrip.html">StepGrip</a> · <a href="streampet.html">StreamPet</a></span>
+  </div>
+</footer>
+
+<!-- CART -->
+<div id="cart" aria-hidden="true">
+  <div class="shade" data-close-cart></div>
+  <aside class="panel" role="dialog" aria-label="Your cart">
+    <div class="panel-head"><h3>Your cart</h3><button class="close" data-close-cart aria-label="Close cart">×</button></div>
+    <div id="cart-lines"></div>
+    <label class="zone">Ship to
+      <select id="cart-zone">
+        <option value="CA">Canada</option>
+        <option value="US">United States</option>
+        <option value="WORLD">Rest of the world</option>
+      </select>
+    </label>
+    <div class="totals">
+      <div><span>Subtotal</span><span id="cart-sub">$0.00</span></div>
+      <div><span>Shipping</span><span id="cart-ship">—</span></div>
+      <div class="grand"><span id="cart-total-label">Total</span><span id="cart-total">$0.00</span></div>
+    </div>
+    <p id="cart-note"></p>
+    <button class="btn" id="checkout-btn" disabled>Checkout</button>
+    <p id="cart-error" role="alert"></p>
+    <p class="secure">Secure payment by Stripe. Any taxes are shown at checkout.</p>
+  </aside>
+</div>
+
+<script src="assets/shop.js"></script>
+<script>
+  // Fades each section in gently as you scroll to it.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

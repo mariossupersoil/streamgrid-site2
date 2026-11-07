@@ -27,7 +27,7 @@ if ($zone['countries'] === '*') {
 $params = [
   'mode' => 'payment',
   'success_url' => $cfg['site_url'] . '/success.html?session_id={CHECKOUT_SESSION_ID}',
-  'cancel_url'  => $cfg['site_url'] . '/index.html#shop',
+  'cancel_url'  => $cfg['site_url'] . '/' . (in_array($in['page'] ?? '', ['index.html', 'stepgrip.html', 'streampet.html'], true) ? $in['page'] : 'index.html') . '#shop',
   'billing_address_collection' => 'auto',
   'phone_number_collection[enabled]' => 'true',
 ];

@@ -6,6 +6,10 @@ const SG_PRODUCTS = {
   household: { name: 'The Household',  price: 9500 },
   refill:    { name: 'Refill mat',     price: 2700 },
   clips:     { name: 'Spare clip set', price: 900 },
+  stepgrip:       { name: 'StepGrip mat',      price: 3400 },
+  scrubber:       { name: 'StepGrip Scrubber', price: 1700 },
+  'stepgrip-set': { name: 'StepGrip Set',      price: 4500 },
+  streampet:      { name: 'StreamPet lick mat', price: 3200 },
   'single-sub':    { name: 'Single subscription',    price: 3300, every: 3 },
   'pair-sub':      { name: 'Pair subscription',      price: 5900, every: 3 },
   'household-sub': { name: 'Household subscription', price: 8100, every: 3 },
@@ -75,7 +79,7 @@ async function checkout() {
   const btn = document.getElementById('checkout-btn'), err = document.getElementById('cart-error');
   err.textContent = ''; btn.disabled = true; btn.textContent = 'One moment…';
   try {
-    const r = await fetch('checkout.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: cart, zone }) });
+    const r = await fetch('checkout.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: cart, zone, page: location.pathname.split('/').pop() || 'index.html' }) });
     const data = await r.json();
     if (data.url) { window.location = data.url; return; }
     err.textContent = data.error || 'Checkout could not start.';
