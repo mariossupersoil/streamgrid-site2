@@ -44,7 +44,7 @@ return array_merge([
     'clips'     => ['name' => 'Spare clip set',             'desc' => '2 clips and mounting tape',            'price' => 900],
 
     // StepGrip (shower) and StreamPet (pets)
-    'stepgrip'     => ['name' => 'StepGrip foot scrubbing mat', 'desc' => 'Silicone shower mat with 28 suction cups', 'price' => 3400],
+    'stepgrip'     => ['name' => 'StepGrip foot scrubbing mat', 'desc' => '12 x 10 in silicone shower mat with 63 suction cups', 'price' => 3400],
     'scrubber'     => ['name' => 'StepGrip Scrubber',           'desc' => 'Handheld silicone scrubber with grip handle', 'price' => 1700],
     'stepgrip-set' => ['name' => 'StepGrip Set',                'desc' => 'Foot scrubbing mat and hand scrubber', 'price' => 4500],
     'streampet'    => ['name' => 'StreamPet lick mat',          'desc' => 'Food-grade silicone lick mat with suction cups', 'price' => 3200],
