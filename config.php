@@ -42,7 +42,18 @@ return array_merge([
     'household' => ['name' => 'StreamGrid — The Household', 'desc' => '3 StreamGrid, 3 clips, mounting tape', 'price' => 9500],
     'refill'    => ['name' => 'StreamGrid refill mat',      'desc' => '1 replacement mat (uses your existing clip)', 'price' => 2700],
     'clips'     => ['name' => 'Spare clip set',             'desc' => '2 clips and mounting tape',            'price' => 900],
+
+    // Subscribe & save: billed today, then every 3 months. Always ships free.
+    // First box includes clips and tape; later boxes are fresh mats only.
+    'single-sub'    => ['name' => 'StreamGrid subscription — Single',    'desc' => '1 fresh mat every 3 months (first box includes clip and tape)',  'price' => 3300, 'every_months' => 3],
+    'pair-sub'      => ['name' => 'StreamGrid subscription — Pair',      'desc' => '2 fresh mats every 3 months (first box includes clips and tape)', 'price' => 5900, 'every_months' => 3],
+    'household-sub' => ['name' => 'StreamGrid subscription — Household', 'desc' => '3 fresh mats every 3 months (first box includes clips and tape)', 'price' => 8100, 'every_months' => 3],
   ],
+
+  // Customers manage or cancel subscriptions here. Get the link from
+  // Stripe > Settings > Billing > Customer portal. You can also set it in
+  // streamgrid-secrets.php as 'portal_url'.
+  'portal_url' => '',
 
   // 4. Shipping (in cents). Free when the order reaches the threshold.
   'shipping_flat'           => 1200,   // $12.00

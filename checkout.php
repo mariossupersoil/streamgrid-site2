@@ -23,7 +23,7 @@ $params = [
   'billing_address_collection' => 'auto',
   'phone_number_collection[enabled]' => 'true',
 ];
-$subtotal = 0; $i = 0;
+$subtotal = 0; $i = 0; $has_sub = false;
 foreach ($cart as $item) {
   $id  = (string)($item['id'] ?? '');
   $qty = (int)($item['qty'] ?? 0);
@@ -35,12 +35,22 @@ foreach ($cart as $item) {
   $params["line_items[$i][price_data][unit_amount]"] = $p['price'];
   $params["line_items[$i][price_data][product_data][name]"] = $p['name'];
   $params["line_items[$i][price_data][product_data][description]"] = $p['desc'];
+  if (!empty($p['every_months'])) {                 // a subscription item
+    $params["line_items[$i][price_data][recurring][interval]"] = 'month';
+    $params["line_items[$i][price_data][recurring][interval_count]"] = (int)$p['every_months'];
+    $has_sub = true;
+  }
   $subtotal += $p['price'] * $qty; $i++;
 }
 if ($i === 0) fail('Your cart is empty.');
 
 foreach ($cfg['ship_to_countries'] as $k => $c) $params["shipping_address_collection[allowed_countries][$k]"] = $c;
 
+if ($has_sub) {
+  // Subscription checkout: billed today and every 3 months. Anything else in
+  // the same order is charged once. Subscription orders always ship free.
+  $params['mode'] = 'subscription';
+} else {
 $free = $subtotal >= $cfg['free_shipping_threshold'];
 $params['shipping_options[0][shipping_rate_data][type]'] = 'fixed_amount';
 $params['shipping_options[0][shipping_rate_data][display_name]'] = $free ? 'Free shipping' : 'Standard shipping';
@@ -50,6 +60,7 @@ $params['shipping_options[0][shipping_rate_data][delivery_estimate][minimum][uni
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'] = 3;
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][maximum][unit]'] = 'business_day';
 $params['shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]'] = 8;
+}
 if ($cfg['automatic_tax']) $params['automatic_tax[enabled]'] = 'true';
 
 $ch = curl_init('https://api.stripe.com/v1/checkout/sessions');

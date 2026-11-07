@@ -144,7 +144,13 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .set h3 { font-size: 30px; }
 .set .what { color: var(--slate); margin: 6px 0 22px; }
 .set .price { font-family: var(--serif); font-size: 44px; line-height: 1; }
-.set .save { font-size: 13px; color: var(--brass); letter-spacing: .06em; margin-top: 8px; min-height: 1.4em; }
+.set .save { font-size: 13px; color: var(--brass); letter-spacing: .06em; margin-top: 8px; min-height: 2.8em; }
+.set .price small { font-family: var(--sans); font-size: 14px; color: var(--slate); letter-spacing: .02em; }
+.plan { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(31,36,39,.18); margin-bottom: 22px; }
+.plan label { position: relative; cursor: pointer; text-align: center; font-size: 12px; letter-spacing: .06em; padding: 10px 6px; color: var(--slate); transition: background .3s, color .3s; }
+.plan input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.plan label:has(input:checked) { background: var(--deep); color: #fff; }
+.plan label:has(input:focus-visible) { outline: 2px solid var(--brass); outline-offset: -4px; }
 .set ul { list-style: none; margin: 22px 0 28px; color: var(--slate); font-size: 15px; flex: 1; }
 .set li { padding: 6px 0; border-bottom: 1px solid rgba(31,36,39,.08); }
 .set .btn { text-align: center; }
@@ -301,21 +307,33 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
       <h2 class="reveal">Choose your set.</h2>
       <p class="lead reveal" style="margin-top:16px">Every set comes ready to hang: the mat with its adjustable strap, a clip, and waterproof mounting tape.</p>
       <div class="sets">
-        <div class="set reveal">
+        <div class="set reveal" data-plan-card data-one-price="$39" data-sub-price="$33" data-one-save="" data-sub-save="Save $6 · fresh mat every 3 months · ships free">
           <h3>The Single</h3><p class="what">For one bathroom.</p>
+          <div class="plan" role="radiogroup" aria-label="Purchase option for The Single">
+            <label><input type="radio" name="plan-single" value="single" checked><span>One-time</span></label>
+            <label><input type="radio" name="plan-single" value="single-sub"><span>Subscribe &amp; save 15%</span></label>
+          </div>
           <div class="price">$39</div><div class="save">&nbsp;</div>
           <ul><li>1 StreamGrid</li><li>1 clip and mounting tape</li></ul>
           <button class="btn" data-add="single">Add to cart</button>
         </div>
-        <div class="set reveal">
+        <div class="set reveal" data-plan-card data-one-price="$69" data-sub-price="$59" data-one-save="Save $9" data-sub-save="Save $10 · fresh mats every 3 months · ships free">
           <h3>The Pair</h3><p class="what">The main bath and the guest bath.</p>
+          <div class="plan" role="radiogroup" aria-label="Purchase option for The Pair">
+            <label><input type="radio" name="plan-pair" value="pair" checked><span>One-time</span></label>
+            <label><input type="radio" name="plan-pair" value="pair-sub"><span>Subscribe &amp; save 15%</span></label>
+          </div>
           <div class="price">$69</div><div class="save">Save $9</div>
           <ul><li>2 StreamGrid</li><li>2 clips and mounting tape</li></ul>
           <button class="btn" data-add="pair">Add to cart</button>
         </div>
-        <div class="set featured reveal">
+        <div class="set featured reveal" data-plan-card data-one-price="$95" data-sub-price="$81" data-one-save="Save $22 · ships free" data-sub-save="Save $14 more · fresh mats every 3 months · ships free">
           <span class="tag">Best value</span>
           <h3>The Household</h3><p class="what">Every bathroom, done.</p>
+          <div class="plan" role="radiogroup" aria-label="Purchase option for The Household">
+            <label><input type="radio" name="plan-household" value="household" checked><span>One-time</span></label>
+            <label><input type="radio" name="plan-household" value="household-sub"><span>Subscribe &amp; save 15%</span></label>
+          </div>
           <div class="price">$95</div><div class="save">Save $22 · ships free</div>
           <ul><li>3 StreamGrid</li><li>3 clips and mounting tape</li></ul>
           <button class="btn" data-add="household">Add to cart</button>
@@ -329,7 +347,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <div><h3 style="font-size:24px">Spare clip set · $9</h3><p>Two extra clips and tape, for a second toilet or a fresh start.</p></div>
         <button class="btn ghost" data-add="clips">Add to cart</button>
       </div>
-      <p class="ship-note reveal">Prices in Canadian dollars. Free shipping in Canada on orders over $75; otherwise $12. Secure checkout by Stripe.</p>
+      <p class="ship-note reveal">Prices in Canadian dollars. Subscriptions ship free and renew every 3 months; cancel anytime. One-time orders ship free over $75, otherwise $12. Secure checkout by Stripe.</p>
     </div>
   </section>
 
@@ -355,7 +373,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
         <details class="reveal"><summary>How do I clean it?</summary><p>Lift it out once a week and rinse it in warm, soapy water, then hang it back up. It is one piece, so there is nothing to take apart.</p></details>
         <details class="reveal"><summary>Does the clip mark the porcelain?</summary><p>The clip attaches with waterproof foam tape, not screws or glue. It sits just under the rim, out of sight.</p></details>
         <details class="reveal"><summary>How often should I replace it?</summary><p>Every 3 months, for the freshest bathroom. Your clip stays in place, so you only need a refill mat.</p></details>
-        <details class="reveal"><summary>How does shipping work?</summary><p>Shipping is free in Canada on orders over $75, and $12 otherwise. We email you when your order ships.</p></details>
+        <details class="reveal"><summary>How does the subscription work?</summary><p>You pay today and receive your set with its clip. Every 3 months after that, we send fresh mats and charge the subscription price. It always ships free, and you can cancel anytime from the "Manage subscription" link at the bottom of this page.</p></details>
+        <details class="reveal"><summary>How does shipping work?</summary><p>Subscriptions always ship free. One-time orders ship free in Canada over $75, and $12 otherwise. We email you when your order ships.</p></details>
       </div>
     </div>
   </section>
@@ -383,7 +402,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 <footer>
   <div class="wrap">
     <span>© 2026 StreamGrid</span>
-    <span>A cleaner floor, quietly.</span>
+    <span><a href="portal.php">Manage subscription</a> · A cleaner floor, quietly.</span>
   </div>
 </footer>
 
@@ -396,7 +415,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
     <div class="totals">
       <div><span>Subtotal</span><span id="cart-sub">$0.00</span></div>
       <div><span>Shipping</span><span id="cart-ship">—</span></div>
-      <div class="grand"><span>Total</span><span id="cart-total">$0.00</span></div>
+      <div class="grand"><span id="cart-total-label">Total</span><span id="cart-total">$0.00</span></div>
     </div>
     <p id="cart-note"></p>
     <button class="btn" id="checkout-btn" disabled>Checkout</button>
