@@ -1,0 +1,4 @@
+# Keeps your settings file (with your Stripe key) private.
+<Files "config.php">
+  Require all denied
+</Files>

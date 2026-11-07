@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" role="img" aria-label="StreamGrid">
+  <g transform="translate(16 24)" fill="none" stroke="#8C6A3A" stroke-width="3" stroke-linecap="round">
+    <rect x="1.5" y="1.5" width="69" height="69" rx="14"/>
+    <line x1="24.5" y1="14" x2="24.5" y2="58"/>
+    <line x1="47.5" y1="14" x2="47.5" y2="58"/>
+    <line x1="14" y1="24.5" x2="58" y2="24.5"/>
+    <line x1="14" y1="47.5" x2="58" y2="47.5"/>
+  </g>
+  <text x="112" y="80" font-family="'Cormorant Garamond', Garamond, 'Times New Roman', serif" font-size="58" font-weight="500" letter-spacing="2" fill="#1F2427">StreamGrid</text>
+</svg>

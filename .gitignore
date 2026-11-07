@@ -1,0 +1,4 @@
+# Never commit private settings
+streamgrid-secrets.php
+*.zip
+.DS_Store
