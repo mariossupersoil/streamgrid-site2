@@ -9,9 +9,20 @@
 //  HOME folder (above "domains"). See streamgrid-secrets.example.php.
 // ===================================================================
 
-$secrets = [];
-foreach ([dirname(__DIR__, 3), dirname(__DIR__)] as $dir) {   // Home folder first, then the folder above public_html
-  if (is_file("$dir/streamgrid-secrets.php")) { $secrets = require "$dir/streamgrid-secrets.php"; break; }
+// Look for the private file in every folder above this site, so it is found
+// even when Hostinger runs the site from a build folder. First match wins.
+$secrets = []; $secrets_found = false; $seen = [];
+$starts = array_filter([__DIR__, $_SERVER['DOCUMENT_ROOT'] ?? '', getenv('HOME') ?: '']);
+if (function_exists('posix_getpwuid') && function_exists('posix_geteuid')) {
+  $pw = @posix_getpwuid(posix_geteuid()); if (!empty($pw['dir'])) $starts[] = $pw['dir'];
+}
+foreach ($starts as $dir) {
+  for ($i = 0; $i < 8 && $dir && !isset($seen[$dir]); $i++) {
+    $seen[$dir] = true;
+    $f = rtrim($dir, '/') . '/streamgrid-secrets.php';
+    if (@is_file($f)) { $loaded = require $f; if (is_array($loaded)) { $secrets = $loaded; $secrets_found = true; } break 2; }
+    $up = dirname($dir); if ($up === $dir) break; $dir = $up;
+  }
 }
 
 return array_merge([
@@ -41,4 +52,6 @@ return array_merge([
   //    (Stripe Dashboard > Tax). Then change to true.
   'automatic_tax' => false,
 
-], $secrets);
+  'secrets_found' => false,
+
+], $secrets, ['secrets_found' => $secrets_found]);

@@ -9,7 +9,8 @@ $cfg = require __DIR__ . '/config.php';
 function fail($msg, $code = 400) { http_response_code($code); echo json_encode(['error' => $msg]); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail('Use POST.', 405);
-if (strpos($cfg['stripe_secret_key'], 'PASTE_YOUR_KEY') !== false) fail('The shop is not connected to Stripe yet. Add your key in config.php.', 500);
+if (!$cfg['secrets_found']) fail('The shop is not connected to Stripe yet (settings file not found).', 500);
+if (!preg_match('/^sk_(test|live)_[A-Za-z0-9]{10,}$/', $cfg['stripe_secret_key'])) fail('The shop is not connected to Stripe yet (the Stripe key in the settings file looks incomplete).', 500);
 
 $in   = json_decode(file_get_contents('php://input'), true);
 $cart = is_array($in['items'] ?? null) ? $in['items'] : [];
