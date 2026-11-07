@@ -200,7 +200,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .hero .wrap { grid-template-columns: 1fr; gap: 8px; }
   .hero-text { padding: 120px 0 0; }
   .hero-img { padding-bottom: 40px; }
-  .hero-img img { width: 100%; }
+  .hero-img img { width: 100%; height: auto; }
   section { padding: 84px 0; }
   .intro, .intro.four, .steps, .details, .about, .enquire .grid { grid-template-columns: 1fr; gap: 40px; }
   .gallery { grid-template-columns: 1fr 1fr; }
