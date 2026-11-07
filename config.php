@@ -5,12 +5,14 @@
 //  so nobody can change a price in their browser.
 //
 //  PRIVATE settings (Stripe key, email addresses) live in a separate
-//  file that is NOT in GitHub: streamgrid-secrets.php, one folder ABOVE
-//  public_html on Hostinger. See streamgrid-secrets.example.php.
+//  file that is NOT in GitHub: streamgrid-secrets.php, in your Hostinger
+//  HOME folder (above "domains"). See streamgrid-secrets.example.php.
 // ===================================================================
 
-$secrets_file = dirname(__DIR__) . '/streamgrid-secrets.php';
-$secrets = is_file($secrets_file) ? (require $secrets_file) : [];
+$secrets = [];
+foreach ([dirname(__DIR__, 3), dirname(__DIR__)] as $dir) {   // Home folder first, then the folder above public_html
+  if (is_file("$dir/streamgrid-secrets.php")) { $secrets = require "$dir/streamgrid-secrets.php"; break; }
+}
 
 return array_merge([
 
