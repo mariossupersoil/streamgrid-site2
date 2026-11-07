@@ -2,3 +2,11 @@
 <Files "config.php">
   Require all denied
 </Files>
+
+# Always check for the newest version of pages, styles and scripts,
+# so site updates show up right away instead of an old saved copy.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|php|css|js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
